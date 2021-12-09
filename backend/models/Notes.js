@@ -1,24 +1,27 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
-// eslint-disable-next-line no-undef
-const notesSchema = new mongoose.Schema({
-    title: { 
-        type: String, 
-        required: true 
+const NotesSchema = new Schema({
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     },
-    description:{ 
-        type: String, 
-        required: true,
-        unique:true
-    },
-    tag:{ 
+    title:{
         type: String,
-        default:"General"
+        required: true
+    },
+    description:{
+        type: String,
+        required: true, 
+    },
+    tag:{
+        type: String,
+        default: "General"
     },
     date:{
-        type:String,
-        default:Date.now
-    }
-});
+        type: Date,
+        default: Date.now
+    },
+  });
 
-module.exports  = mongoose.model('notes',notesSchema)
+  module.exports = mongoose.model('notes', NotesSchema);
