@@ -15,7 +15,7 @@ const Alert = () => {
   };
   return (
     <div style={{ height: "50px" }}>
-      {alert && (
+      { alert && (
         <div
           className={`alert alert-${alert.type} alert-dismissible fade show`}
           role="alert"

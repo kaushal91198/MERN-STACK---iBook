@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = "kaushalmern$tack";
-
 const fetchUser = (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) {
@@ -9,7 +8,7 @@ const fetchUser = (req, res, next) => {
   try {
     const data = jwt.verify(token, JWT_SECRET);
     console.log(data)
-    req.user = data.user;
+    req.session.user = data.user;
     next();
   } catch (error) {
     res.status(401).json({ message: "Please authenticate using valid token" });

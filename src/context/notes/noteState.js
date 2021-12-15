@@ -106,7 +106,7 @@ const NoteState = (props) => {
       method: "PUT", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json",
-        "auth-token":localStorage.getItem('token')
+        "auth-token":localStorage.getItem('token') 
       },
       body: JSON.stringify({title,description,tag}), // body data type must match "Content-Type" header
     });

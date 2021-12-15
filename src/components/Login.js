@@ -42,7 +42,7 @@ const Login = (props) => {
     }
   };
   return (
-    <div className="container my-3">
+    <div className="container my-3 bg-success" style={{width:"32vw",border:"solid black"}}>
       <h2>Login to continue to iBook</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-3">
@@ -57,9 +57,6 @@ const Login = (props) => {
             onChange={onChange}
             value={state.email}
           />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
         </div>
         <div className="form-group mb-3">
           <label htmlFor="password">Password</label>
@@ -73,9 +70,11 @@ const Login = (props) => {
             value={state.password}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <div className="d-flex justify-content-center my-2">
+        <button type="submit" className="btn btn-primary" >
           Submit
         </button>
+        </div>
       </form>
     </div>
   );

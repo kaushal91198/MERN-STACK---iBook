@@ -50,7 +50,7 @@ const Signup = (props) => {
   };
 
   return (
-    <div className="container my-3">
+    <div className="container my-3 bg-success" style={{width:"41vw",border:"solid black"}}>
       <h2>Create account to continue to iBook</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-3">
@@ -80,9 +80,7 @@ const Signup = (props) => {
             onChange={onChange}
             value={state.email}
           />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
+       
         </div>
         <div className="form-group mb-3">
           <label htmlFor="password">Password</label>
@@ -112,9 +110,11 @@ const Signup = (props) => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <div className="d-flex justify-content-center my-2">
+        <button type="submit" className="btn btn-primary" >
           Submit
         </button>
+        </div>
       </form>
     </div>
   );

@@ -7,7 +7,7 @@ const { body, validationResult } = require("express-validator");
 //Route:1 -> Get the all the notes : GET "/api/notes/fetchallnotes"
 router.get("/fetchallnotes", fetchUser, async (req, res) => {
   try {
-    const notes = await Notes.find({ user: req.user.id });
+    const notes = await Notes.find({ user: req.session.user.id });
     res.json(notes);
   } catch (error) {
     console.error(error.message);
@@ -37,7 +37,7 @@ router.post(
         title,
         description,
         tag,
-        user: req.user.id,
+        user: req.session.user.id,
       });
       const savedNotes = await note.save();
       res.json(savedNotes);
@@ -71,7 +71,7 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
       res.status(500).send({errors:"Not Found"});
     }
 
-    if (note.user.toString() !== req.user.id) {
+    if (note.user.toString() !== req.session.user.id) {
       res.status(500).send({errors:"Not Allowed"});
     }
     note = await Notes.findByIdAndUpdate(id, { $set: newNote }, { new: true });
@@ -92,7 +92,7 @@ router.delete("/deletenote/:id", fetchUser, async (req, res) => {
       res.status(500).send({errors:"Not Found"});
     }
 
-    if (note.user.toString() !== req.user.id) {
+    if (note.user.toString() !== req.session.user.id) {
       res.status(500).send({errors:"Not Allowed"});
     }
 

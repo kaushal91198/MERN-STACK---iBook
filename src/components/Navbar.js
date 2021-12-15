@@ -6,14 +6,11 @@ function Navbar() {
   const navigate = useNavigate()
   const handleLogout = ()=>{
     localStorage.removeItem('token')
-    navigate("../login", { replace: true });  }
+    navigate("../login ", { replace: true });  }
  
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          iBook
-        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -26,6 +23,11 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul className="nav navbar-nav navbar-center">
+            <Link className="navbar-brand" to="/">
+              iBook
+            </Link>
+          </ul>
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
