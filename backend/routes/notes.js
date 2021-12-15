@@ -8,7 +8,7 @@ const { body, validationResult } = require("express-validator");
 router.get("/fetchallnotes", fetchUser, async (req, res) => {
   try {
     const notes = await Notes.find({ user: req.user.id });
-    res.json({ notes });
+    res.json(notes);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal server error");
@@ -40,10 +40,10 @@ router.post(
         user: req.user.id,
       });
       const savedNotes = await note.save();
-      res.json({ savedNotes });
+      res.json(savedNotes);
     } catch (error) {
-      console.error(error.message);
-      res.status(500).send("Internal server error");
+      console.error(error.message)
+      res.status(500).send({errors:"Internal server error"});
     }
   }
 );
@@ -68,17 +68,17 @@ router.put("/updatenote/:id", fetchUser, async (req, res) => {
     // Find the note to be updated and update it
     let note = await Notes.findById(id);
     if (!note) {
-      return res.status(404).send("Not Found");
+      res.status(500).send({errors:"Not Found"});
     }
 
     if (note.user.toString() !== req.user.id) {
-      return res.status(401).send("Not Allowed");
+      res.status(500).send({errors:"Not Allowed"});
     }
     note = await Notes.findByIdAndUpdate(id, { $set: newNote }, { new: true });
-    res.json({ note });
+    res.json(note);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal server error");
+    res.status(500).send({errors:"Internal server error"});
   }
 });
 
@@ -89,11 +89,11 @@ router.delete("/deletenote/:id", fetchUser, async (req, res) => {
     // Find the note to be deleted and delete it
     let note = await Notes.findById(id);
     if (!note) {
-      return res.status(404).send("Not Found");
+      res.status(500).send({errors:"Not Found"});
     }
 
     if (note.user.toString() !== req.user.id) {
-      return res.status(401).send("Not Allowed");
+      res.status(500).send({errors:"Not Allowed"});
     }
 
     //Allow deletion only if user owns this note
@@ -101,7 +101,7 @@ router.delete("/deletenote/:id", fetchUser, async (req, res) => {
     res.json({"success":"note has been deleted succesfully",note:note });
   } catch (error) {
     console.log(error);
-    res.status(500).send("Internal server error");
+    res.status(500).send({errors:"Internal server error"});
   }
 });
 
